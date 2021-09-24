@@ -21,13 +21,10 @@ const todosLosProductos = [producto_uno, producto_dos, producto_tres, producto_c
 filtrarProductos();
 
 function filtrarProductos(filtro = 'default'){
-    let nuevosProductos;
-    if(filtro !== "default"){
-        nuevosProductos = todosLosProductos.filter(producto => producto.category == filtro);
-    }
-    else{
-        nuevosProductos = todosLosProductos
-    }
+    let nuevosProductos = (filtro !== "default") ?
+    todosLosProductos.filter(producto => producto.category == filtro):
+    todosLosProductos;
+   
     let acumulador = ``;
     nuevosProductos.forEach((producto) => {
     acumulador += `<div class="col mb-5 cajas" id="${producto.title}">
@@ -48,8 +45,9 @@ function filtrarProductos(filtro = 'default'){
             </div>
             </div>`
     });
-    document.getElementById("productos").innerHTML = acumulador;
+    $("#productos").html(acumulador)
 }
+
 
 //funciones carrito
 function borrarDelCarrito(title){
