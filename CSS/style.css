@@ -1,0 +1,146 @@
+@charset "UTF-8";
+
+/* estilo general*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: o;
+}
+/*portada*/
+#portada{
+  text-align: center;
+}
+#cabecera {
+    background-image: linear-gradient(to right bottom, #00f5e3, #00e2ff, #00c8ff, #4ea6ff, #b678f3, #ca5fdd, #da40c3, #e500a4, #db00b7, #ca00cc, #b000e4, #8506fd);   
+}
+
+
+#cabecera h1{
+    font-size:1.7rem;
+    color: white;
+}
+
+/*logos*/
+.logo-wsp{
+  width: 5rem;
+  height: auto;
+  position: fixed;
+  right: 1rem;
+  bottom: 15rem;
+  animation-timing-function: linear;
+  z-index: 2;
+}
+.logo-wsp:hover{
+  background-color: green;
+  border-radius: 100%;
+}
+#logoIg{
+  color: #ff0066;
+  font-size: 4rem;
+  width: 5rem;
+  height: auto;
+  position: fixed;
+  right: 1rem;
+  top: 10rem;
+  z-index: 1;
+}
+#logoIg:hover{
+    background-color: #ff0066 ;
+    border-radius: 40px;
+    color: black;
+}
+#logo{
+    border-radius: 5rem;
+}
+#logo:hover{
+    animation-play-state: inherit;
+}
+
+.logoCentral{
+    width: 20rem;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
+
+/*footer*/
+
+footer{
+    background-color: rgb(32, 30, 30);
+}
+.boton{
+    padding: 0.4rem;
+    border-color: #eb268f;
+    background-color: #eb268f;
+    border-radius: 0.2rem;
+    font-weight: 700;
+    font-size: 1rem;
+    font-family: 'Inconsolata', monospace;;
+}
+
+.boton:hover{
+    border-color: white;  
+    color: white;  
+    background-color: black;
+    transition: 300ms linear;
+}
+
+input,textarea{
+    color: white;
+    padding: 0.2rem;
+    font-family: 'Inconsolata', monospace;
+    font-size: 1.5rem;
+    background-color:rgb(32, 30, 30);
+}
+input,textarea:focus{
+    outline: 0;
+    border-color: #ff0066;
+    background-color: rgb(22, 20, 20);
+}
+p.text-muted{
+    text-align: center;
+    font-size: 1rem;
+}
+
+footer a i{
+    text-decoration: none;
+    font-size:3.5rem;
+    padding:0, 1rem, 0, 1rem;
+    margin:0.8rem;
+    color: #ff0066;
+}
+footer a i:hover{
+    color:white;
+}
+footer h3{
+    font-family: 'Bungee Shade', cursive;
+    font-size: 2.3rem;
+    color: rgb(177, 174, 174);
+    text-align: center;
+}
+footer p{
+    color: white;
+    padding: 1rem;
+    font-family: 'Inconsolata', monospace;
+    font-size: 1.3rem;
+}
+
+
+/*animacion jquery*/
+.section-1 .slide-in-demo {
+    position: absolute;
+    top: 15%;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    font-size: 4em;
+}
+
+
