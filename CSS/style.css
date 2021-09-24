@@ -58,6 +58,8 @@ body {
 }
 #logo{
     border-radius: 5rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 #logo:hover{
     animation-play-state: inherit;
