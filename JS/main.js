@@ -5,14 +5,14 @@ if (localStorage.carrito !=null){
 }
 
 
-const producto_uno = new Producto("Tazas", 800, "Taza de Cerámica Premium personalizada", "https://github.com/DanielaSEscudero/tiendaTola-Tola/blob/main/multimedia/Productos/taza%201.JPG", "tazas" );
-const producto_dos = new Producto("Chopp", 1200, "Chopp de vidrio Esmerilado personalizado", "https://github.com/DanielaSEscudero/tiendaTola-Tola/blob/main/multimedia/Productos/chop%201.JPG", "tazas");
-const producto_tres = new Producto("llaveros", 250, "Llaveros acrílicos con código Spotify Con una canción o una playlist","https://github.com/DanielaSEscudero/tiendaTola-Tola/blob/main/multimedia/Productos/llavero%201.JPG", "llaveros");
-const producto_cuatro = new Producto("llaveros", 250, "Llaveros acrílicos redondo con la incripcion personalizada","https://github.com/DanielaSEscudero/tiendaTola-Tola/blob/main/multimedia/Productos/llavero%20redondo%201.jpg", "llaveros");
-const producto_cinco = new Producto("Body Bebe", 500, "Body bebé estampado personalizado ", "https://github.com/DanielaSEscudero/tiendaTola-Tola/blob/main/multimedia/Productos/body%20bebe.JPG", "remeras");
-const producto_seis = new Producto("Buzo Canguro", 2000, "Buzo friza cuello canguro estampado", "https://github.com/DanielaSEscudero/tiendaTola-Tola/blob/main/multimedia/Productos/buzo%20canguro1.JPG", "remeras");
-const producto_siete = new Producto("Buzo redondo", 2000, "Buzo friza cuello redondo estampado ", "https://github.com/DanielaSEscudero/tiendaTola-Tola/blob/main/multimedia/Productos/buzo%20redondo1.jpg","remeras");
-const producto_ocho = new Producto("Remeras", 1700, "Remera algodón Premium estampada", "https://github.com/DanielaSEscudero/tiendaTola-Tola/blob/main/multimedia/Productos/reme%203.jpeg","remeras");
+const producto_uno = new Producto("Tazas", 800, "Taza de Cerámica Premium personalizada", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/taza%201.JPG", "tazas" );
+const producto_dos = new Producto("Chopp", 1200, "Chopp de vidrio Esmerilado personalizado", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/chop%201.JPG", "tazas");
+const producto_tres = new Producto("llaveros", 250, "Llaveros acrílicos con código Spotify Con una canción o una playlist","https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/llavero%201.JPG", "llaveros");
+const producto_cuatro = new Producto("llaveros", 250, "Llaveros acrílicos redondo con la incripcion personalizada","https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/llavero%20redondo%201.jpg", "llaveros");
+const producto_cinco = new Producto("Body Bebe", 500, "Body bebé estampado personalizado ", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/body%20bebe.JPG", "remeras");
+const producto_seis = new Producto("Buzo Canguro", 2000, "Buzo friza cuello canguro estampado", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/buzo%20canguro1.JPG", "remeras");
+const producto_siete = new Producto("Buzo redondo", 2000, "Buzo friza cuello redondo estampado ", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/buzo%20redondo1.jpg","remeras");
+const producto_ocho = new Producto("Remeras", 1700, "Remera algodón Premium estampada", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/reme%203.jpeg","remeras");
 
 
 const todosLosProductos = [producto_uno, producto_dos, producto_tres, producto_cuatro, producto_cinco, producto_seis, producto_siete, producto_ocho];
