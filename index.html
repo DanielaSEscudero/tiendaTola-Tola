@@ -36,19 +36,38 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!" onclick="filtrarProductos()">Todos los Productos</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!" onclick="filtrarProductos('popular')">Populares</a></li>
-                        <li><a class="dropdown-item" href="#!" onclick="filtrarProductos('masVendido')">Novedades</a></li>
+                        <li><a class="dropdown-item" href="#!" onclick="filtrarProductos('tazas')">Tazas y Chops</a></li>
+                        <li><a class="dropdown-item" href="#!" onclick="filtrarProductos('remeras')">Remeras y Buzos</a></li>
+                        <li><a class="dropdown-item" href="#!" onclick="filtrarProductos('llaveros')">Llaveros</a></li>
                     </ul>
                     </li>
                 </ul>
             </div>
-            <form class="d-flex">
-                <button class="btn btn-outline-dark" type="submit">
+            <form class="d-flex">               
+                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <i class="bi-cart-fill me-1"></i>
                     Carrito
-                    <span id="contador-carrito" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                    <span id="contador-carrito" onclick="abrirCarrito()" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                 </button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Carrito de compras</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    <div class="modal-body">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary">Confirmar Compra</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
             </form>
+            <div id="modalCarrito"> </div>
         </div>
     </nav>
     <header class="py-5" id="cabecera">
@@ -84,36 +103,9 @@
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" id="productos">
-
             </div>
         </div>
     </section>
-
-
-
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="row gx-4 gx-lg-5 align-items-center">
-                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="" alt="..." />
-                </div>
-                <div class="col-md-6">
-                    <h1 class="display-5 fw-bolder"></h1>
-                    <div class="fs-5 mb-5">
-                        <span>$40.00</span>
-                    </div>
-                    <p class="lead"></p>
-                    <div class="d-flex">
-                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                        <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                            <i class="bi-cart-fill me-1"></i>
-                            Agregar al carrito
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
 
 
     <footer class="row mt-5 pb-3 pt-5 index">
@@ -141,29 +133,25 @@
             <div class="row justify-content-center mb-3">
                 <h3 class="pl-3">CONTACTO</h3>
             </div>            
-            <form action="#" method="POST" class="row justify-content-center">
+            <form action="#" method="POST" class="row justify-content-center" onsubmit="return false;" id="myForm">
                 <div class="col-12 col-lg-6">
                     <div class="row justify-content-center">
-                        <input type="email" placeholder="Nombre" id="nombre" required class="mb-2">
+                        <input type="text" placeholder="Nombre" id="nombre" required class="mb-2">
                     </div>
                     <div class="row justify-content-center">
-                        <input type="email" placeholder="Email" id="emailContacto" required class="mb-2">
+                        <input type="email" placeholder="Email" id="mail" required class="mb-2">
                     </div>   
                     <div class="row justify-content-center">
                         <textarea placeholder="Mensaje" rows="4" cols="24" id="mensaje" class="mb-2"></textarea>
                     </div> 
                     <div class="row justify-content-center">         
-                        <button type="submit" class="boton">ENVIAR</button>
+                        <button type="submit" class="boton btn-enviar" onclick="mostrarDatos()" >ENVIAR</button>
                     </div>  
                 </div>
-                     
-           </form>      
+            </form>  
         </div>  
         <p class="text-muted col-12 mt-4">&copy; Daniela Escudero 2021</p>
     </footer>
-
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-
 </body>
 </html>

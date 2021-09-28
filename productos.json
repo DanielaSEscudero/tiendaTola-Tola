@@ -1,0 +1,73 @@
+
+[{
+    "title": "Tazas",
+      "description": "Taza de Cerámica Premium personalizada",
+      "picture_url": "https://github.com/DanielaSEscudero/tiendaTola-Tola/blob/main/multimedia/Productos/taza%201.JPG",
+      "category_id": "tazas",
+      "quantity": 1,
+      "currency_id": "ARS",
+      "unit_price": "800"
+},
+{
+  "title": "Chopp",
+    "description": "Chopp de vidrio Esmerilado personalizado",
+    "picture_url":  "https://github.com/DanielaSEscudero/tiendaTola-Tola/blob/main/multimedia/Productos/chop%201.JPG",
+    "category_id": "tazas",
+    "quantity": 1,
+    "currency_id": "ARS",
+    "unit_price": "1200"
+},
+{
+  "title": "Llaveros",
+    "description": "Llaveros acrílicos con código Spotify Con una canción o una playlist",
+    "picture_url": "https://github.com/DanielaSEscudero/tiendaTola-Tola/blob/main/multimedia/Productos/llavero%201.JPG",
+    "category_id": "llaveros",
+    "quantity": 1,
+    "currency_id": "ARS",
+    "unit_price": "250"
+},
+{
+  "title": "Llaveros",
+    "description": "Llaveros acrílicos redondo con la incripcion personalizada",
+    "picture_url": "https://github.com/DanielaSEscudero/tiendaTola-Tola/blob/main/multimedia/Productos/llavero%20redondo%201.jpg",
+    "category_id": "llaveros",
+    "quantity": 1,
+    "currency_id": "ARS",
+    "unit_price": "250"
+},
+{
+  "title": "Body Bebe",
+    "description": "Body bebé estampado personalizado",
+    "picture_url": "https://github.com/DanielaSEscudero/tiendaTola-Tola/blob/main/multimedia/Productos/body%20bebe.JPG",
+    "category_id": "remeras",
+    "quantity": 1,
+    "currency_id": "ARS",
+    "unit_price": "500"
+},
+{
+  "title": "Buzo Canguro",
+    "description": "Buzo friza cuello canguro estampado",
+    "picture_url": "https://github.com/DanielaSEscudero/tiendaTola-Tola/blob/main/multimedia/Productos/buzo%20canguro1.JPG",
+    "category_id": "remeras",
+    "quantity": 1,
+    "currency_id": "ARS",
+    "unit_price": "2000"
+},
+{
+  "title": "Buzo redondo",
+    "description": "Buzo friza cuello redondo estampado",
+    "picture_url": "https://github.com/DanielaSEscudero/tiendaTola-Tola/blob/main/multimedia/Productos/buzo%20redondo1.jpg",
+    "category_id": "remeras",
+    "quantity": 1,
+    "currency_id": "ARS",
+    "unit_price": "2000"
+},
+{
+  "title": "Remeras",
+    "description": "Remera algodón Premium estampada",
+    "picture_url": "https://github.com/DanielaSEscudero/tiendaTola-Tola/blob/main/multimedia/Productos/reme%203.jpeg",
+    "category_id": "remeras",
+    "quantity": 1,
+    "currency_id": "ARS",
+    "unit_price": "1700"
+}]
