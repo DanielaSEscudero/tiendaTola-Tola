@@ -5,6 +5,7 @@ if (localStorage.carrito !=null){
 }
 
 
+
 const producto_uno = new Producto("Tazas", 800, "Taza de Cerámica Premium personalizada", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/taza%201.JPG", "tazas" );
 const producto_dos = new Producto("Chopp", 1200, "Chopp de vidrio Esmerilado personalizado", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/chop%201.JPG", "tazas");
 const producto_tres = new Producto("llaveros", 250, "Llaveros acrílicos con código Spotify Con una canción o una playlist","https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/llavero%201.JPG", "llaveros");
@@ -30,7 +31,7 @@ function filtrarProductos(filtro = 'default'){
     nuevosProductos.forEach((producto) => {
     acumulador += `<div class="col mb-5 cajas" id="${producto.title}">
             <div class="card h-100">
-                <img class="card-img-top" id="btn${producto.title}" src="${producto.img}" alt="..." />
+                <img class="card-img-top" id="btn${producto.title}" onclick="verDetalle('${producto.title}')"src="${producto.img}" alt="..." />
                 <div class="card-body p-4">
                     <div class="text-center">
                         <h5 class="fw-bolder">${producto.title}</h5>
@@ -39,7 +40,7 @@ function filtrarProductos(filtro = 'default'){
                     </div>
                 </div>
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#" 
+                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#" id"btn${producto.title}"                    
                     onclick="agregarAlCarrito('${producto.title}')">Agregar al carrito</a>
                     </div>
                 </div>
@@ -50,12 +51,6 @@ function filtrarProductos(filtro = 'default'){
 }
 
 // funcionalidad del carrito
-function borrarDelCarrito(title){
-    const productoEncontrado = todosLosProductos.find(producto => producto.title === title);
-    
-    const card = document.getElementById(title);
-    card.parentNode.removeChild(card);
-}
 
 function agregarAlCarrito(title){
     const productoEncontrado = todosLosProductos.find(producto => producto.title === title);
@@ -65,9 +60,52 @@ function agregarAlCarrito(title){
         alert("algo falló");
     }
     localStorage.carrito = JSON.stringify(carrito);
-    document.getElementById("contador-carrito").innerHTML = carrito.length;
-    
+    document.getElementById("contador-carrito").innerHTML = carrito.length;  
 }
+
+
+
+//**************************************************************************** */
+//nueva pag carrito
+
+listaCarrito();
+
+function listaCarrito(){
+    let acumulador = ``;
+    carrito.forEach((producto) => {
+    acumulador += `<tr>
+    <td> <img src="${producto.img}" width=100</td>
+    <td>${producto.title}</td>
+    <td>$ ${producto.price}</td>
+    <td>
+        <a href="#" class="borrar-producto bi bi-x-square" style="" data-id="${producto.title}" onclick="borrarProducto('${producto.title}')"></a>
+    </td>
+    </tr>`
+    });
+    $("#listado").html(acumulador)
+}
+
+
+
+//function borrarDelbCarrito(title){
+//    const productoEncontrado = todosLosProductos.find(producto => producto.title === title);
+//    
+//    const card = document.getElementById(title);
+//    card.parentNode.removeChild(card);
+//}
+
+
+//function borrarProducto(title){
+//    let parent = document.getElementById().parentNode;
+//     parent.removeChild(document.getElementById(title));
+//     alert("Eliminado");
+//}
+
+
+
+
+
+
 
 
 
@@ -110,7 +148,7 @@ $.ajaxSetup({
 $.post("https://api.mercadopago.com/checkout/preferences", JSON.stringify(elemento), (respuesta, status) => {
     console.log(respuesta);
 });
-
+//"https://sandbox.mercadopago.com.ar/checkout/v1/redirect?pref_id=830672308-4a1d98ef-5101-46fc-b6ed-bfe1aae3e813"
 
 
 
