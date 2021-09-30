@@ -8,6 +8,7 @@
     <!-- Favicon-->
     <link rel="icon" href="multimedia/Logos/favicon.ico" />
     <!-- Bootstrap CSS -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <!-- Estilos Propios-->
@@ -48,6 +49,7 @@
                 <div class="col">
                     <h2 class="d-flex justify-content-center mb-3">Finalizar Compra</h2>
                     <form id="procesar-pago">
+                        <div class="datosCompra">
                         <div class="form-group row">
                             <label for="cliente" class="col-12 col-md-2 col-form-label h2">Cliente :</label>
                             <div class="col-12 col-md-10">
@@ -61,27 +63,29 @@
                                 <input type="text" class="form-control" id="correo" placeholder="Ingresa tu correo" name="cc_to">
                             </div>
                         </div>
-                        <div id="carrito" class="form-group table-responsive" >
-                            <table class="form-group table" id="lista-compra" >
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Imagen</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Precio</th>
-                                        <th scope="col">Eliminar</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="listado">
-                                </tbody>
-                                <tr>
-                                    <th colspan="4" scope="col" class="text-right" id="total">TOTAL :</th>
-                                    <th scope="col">
-                                        <input id="total" name="monto" class="font-weight-bold border-0" readonly style="background-color: white;"></input>
-                                    </th>
-                                </tr>
-
-                            </table>
                         </div>
+                        <section class="container">
+                            <div id="carrito" class="form-group table-responsive" >
+                                <table class="form-group table" id="lista-compra" >
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Imagen</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Precio</th>
+                                            <th scope="col">Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="listado">
+                                    </tbody>
+                                    <tr>
+                                        <th colspan="4" scope="col" class="text-right" id="total">TOTAL :</th>
+                                        <th scope="col">
+                                            <input id="total" name="monto" class="font-weight-bold border-0" readonly style="background-color: white;"></input>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </section>
                         <div class="row justify-content-between">
                             <div class="col-md-4 mb-2">
                                 <a href="index.html" class="btn btn-info btn-block">Seguir comprando</a>
@@ -91,13 +95,8 @@
                             </div>
                         </div>
                     </form>
-
-
                 </div>
-
-
             </div>
-
         </div>
     </main>
 

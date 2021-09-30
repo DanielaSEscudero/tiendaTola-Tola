@@ -78,16 +78,22 @@ function listaCarrito(){
     <td>${producto.title}</td>
     <td>$ ${producto.price}</td>
     <td>
-        <a href="#" class="borrar-producto bi bi-x-square" style="" data-id="${producto.title}" onclick="borrarProducto('${producto.title}')"></a>
+        <a href="#" class="borrar-producto bi bi-x-square" style="font-size: 30px" data-id="${producto.title}" onclick="borrarProducto('${producto.title}')"></a>
     </td>
     </tr>`
     });
     $("#listado").html(acumulador)
 }
 
+//const precioTotal = carrito.find(producto => producto.price === producto.quantity);
+//console.log (precioTotal);
+//function precioTotal(){
+//    carrito.forEach((producto) => {
+//    price = producto.price 
+//}    
 
 
-//function borrarDelbCarrito(title){
+//function borrarDelCarrito(title){
 //    const productoEncontrado = todosLosProductos.find(producto => producto.title === title);
 //    
 //    const card = document.getElementById(title);
@@ -101,7 +107,14 @@ function listaCarrito(){
 //     alert("Eliminado");
 //}
 
-
+function borrarProducto(title){
+    const productoEncontrado = todosLosProductos.find(producto => producto.title === title);
+    if(productoEncontrado != undefined){
+        carrito.pop(productoEncontrado);
+    }
+    localStorage.carrito = JSON.stringify(carrito);
+    document.getElementById("contador-carrito").innerHTML = carrito.length;  
+}
 
 
 
@@ -175,6 +188,12 @@ function mostrarDatos() {
       mail: mail,
       mensaje: mensaje,
     }
-    console.log(valores)
-    alert ("envio exitoso")
+    console.log(valores);
+
+    swal({
+        title: "Gracias!",
+        text: "Nos pondremos en contacto!",
+        icon: "success",
+        button: "ok!",
+      });
 }
