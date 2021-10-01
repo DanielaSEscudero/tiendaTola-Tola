@@ -6,14 +6,14 @@ if (localStorage.carrito !=null){
 
 
 
-const producto_uno = new Producto("Tazas", 800, "Taza de Cerámica Premium personalizada", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/taza%201.JPG", "tazas" );
-const producto_dos = new Producto("Chopp", 1200, "Chopp de vidrio Esmerilado personalizado", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/chop%201.JPG", "tazas");
-const producto_tres = new Producto("llaveros", 250, "Llaveros acrílicos con código Spotify Con una canción o una playlist","https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/llavero%201.JPG", "llaveros");
-const producto_cuatro = new Producto("llaveros", 250, "Llaveros acrílicos redondo con la incripcion personalizada","https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/llavero%20redondo%201.jpg", "llaveros");
-const producto_cinco = new Producto("Body Bebe", 500, "Body bebé estampado personalizado ", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/body%20bebe.JPG", "remeras");
-const producto_seis = new Producto("Buzo Canguro", 2000, "Buzo friza cuello canguro estampado", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/buzo%20canguro1.JPG", "remeras");
-const producto_siete = new Producto("Buzo redondo", 2000, "Buzo friza cuello redondo estampado ", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/buzo%20redondo1.jpg","remeras");
-const producto_ocho = new Producto("Remeras", 1700, "Remera algodón Premium estampada", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/reme%203.jpeg","remeras");
+const producto_uno = new Producto("Tazas", 800, "Taza de Cerámica Premium personalizada", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/taza%201.JPG", "tazas",  );
+const producto_dos = new Producto("Chopp", 1200, "Chopp de vidrio Esmerilado personalizado", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/chop%201.JPG", "tazas", );
+const producto_tres = new Producto("llaveros", 250, "Llaveros acrílicos con código Spotify Con una canción o una playlist","https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/llavero%201.JPG", "llaveros", );
+const producto_cuatro = new Producto("llaveros", 250, "Llaveros acrílicos redondo con la incripcion personalizada","https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/llavero%20redondo%201.jpg", "llaveros", );
+const producto_cinco = new Producto("Body Bebe", 500, "Body bebé estampado personalizado ", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/body%20bebe.JPG", "remeras",);
+const producto_seis = new Producto("Buzo Canguro", 2000, "Buzo friza cuello canguro estampado", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/buzo%20canguro1.JPG", "remeras",);
+const producto_siete = new Producto("Buzo redondo", 2000, "Buzo friza cuello redondo estampado ", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/buzo%20redondo1.jpg","remeras",);
+const producto_ocho = new Producto("Remeras", 1700, "Remera algodón Premium estampada", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/reme%203.jpeg","remeras",);
 
 
 const todosLosProductos = [producto_uno, producto_dos, producto_tres, producto_cuatro, producto_cinco, producto_seis, producto_siete, producto_ocho];
@@ -40,7 +40,7 @@ function filtrarProductos(filtro = 'default'){
                     </div>
                 </div>
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#" id"btn${producto.title}"                    
+                    <div class="text-center"><a class="btn btn-outline-dark mt-auto"                    
                     onclick="agregarAlCarrito('${producto.title}')">Agregar al carrito</a>
                     </div>
                 </div>
@@ -85,40 +85,30 @@ function listaCarrito(){
     $("#listado").html(acumulador)
 }
 
-//const precioTotal = carrito.find(producto => producto.price === producto.quantity);
-//console.log (precioTotal);
-//function precioTotal(){
-//    carrito.forEach((producto) => {
-//    price = producto.price 
-//}    
 
-
-//function borrarDelCarrito(title){
-//    const productoEncontrado = todosLosProductos.find(producto => producto.title === title);
-//    
-//    const card = document.getElementById(title);
-//    card.parentNode.removeChild(card);
-//}
-
-
-//function borrarProducto(title){
-//    let parent = document.getElementById().parentNode;
-//     parent.removeChild(document.getElementById(title));
-//     alert("Eliminado");
-//}
-
+//borrar productos del carrito
 function borrarProducto(title){
-    const productoEncontrado = todosLosProductos.find(producto => producto.title === title);
-    if(productoEncontrado != undefined){
-        carrito.pop(productoEncontrado);
+    const productoEncontrado = carrito.filter(producto => producto.title != title);
+    if (productoEncontrado.length > 0 ){
+        carrito =  productoEncontrado
+    }else{
+        carrito = []
     }
+    
     localStorage.carrito = JSON.stringify(carrito);
-    document.getElementById("contador-carrito").innerHTML = carrito.length;  
+    document.getElementById("contador-carrito").innerHTML = carrito.length;
+    listaCarrito();
+  
 }
 
+//calcular total a pagar
+let precioTotal = 0
 
+carrito.forEach(producto => {
+    precioTotal  +=  producto.price 
 
-
+});
+$('#total').html("Total="+ precioTotal);
 
 
 
