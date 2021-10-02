@@ -187,13 +187,11 @@ function pagar(){
         }
     });
     
-    
-        
-        $.post("https://api.mercadopago.com/checkout/preferences", JSON.stringify(elemento), (respuesta, status) => {
-        urlPago = respuesta.init_point
-        window.open(`${urlPago}`);
+    $.post("https://api.mercadopago.com/checkout/preferences", JSON.stringify(elemento), (respuesta, status) => {
+    urlPago = respuesta.init_point
+    window.open(`${urlPago}`);
     });
-    pagar();
+
 }   
     
 
