@@ -157,7 +157,7 @@ const  producto1 = {
     name: 'compra Tola-Tola',
     price: precioTotal,
     stock: 9999,
-    img: 'null',
+    img: 'https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Logos/Logo%20Instagram.jpg',
     offer: null
 }
 
@@ -177,20 +177,27 @@ const elementosMercadopago = carro.map(producto => {
 const elemento = { "items": elementosMercadopago }
 
 
+pagar();
+function pagar(){
 
-$.ajaxSetup({
-    headers : {
-        'Authorization': 'Bearer TEST-2126268000141506-092522-168d7240ca77684a5987f0bd5c377b9c-830672308',
-        'Content-Type': 'application/json'
-    }
-});
-
-
+    $.ajaxSetup({
+        headers : {
+            'Authorization': 'Bearer TEST-2126268000141506-092522-168d7240ca77684a5987f0bd5c377b9c-830672308',
+            'Content-Type': 'application/json'
+        }
+    });
     
-    $.post("https://api.mercadopago.com/checkout/preferences", JSON.stringify(elemento), (respuesta, status) => {
-    urlPago = respuesta.init_point
-    window.open(`${urlPago}`);
-});
+    
+        
+        $.post("https://api.mercadopago.com/checkout/preferences", JSON.stringify(elemento), (respuesta, status) => {
+        urlPago = respuesta.init_point
+        window.open(`${urlPago}`);
+    });
+}   
+    
+
+
+
 
 
 //"https://sandbox.mercadopago.com.ar/checkout/v1/redirect?pref_id=830672308-4a1d98ef-5101-46fc-b6ed-bfe1aae3e813"
