@@ -82,7 +82,6 @@ function listaCarrito(){
     <td> <img src="${producto.img}" width=100</td>
     <td>${producto.title}</td>
     <td>$ ${producto.price}</td>
-    <td> 1 </td>
     <td>
         <a href="#" class="borrar-producto bi bi-x-square" style="font-size: 30px" data-id="${producto.title}" onclick="borrarProducto('${producto.title}')"></a>
     </td>
@@ -105,14 +104,15 @@ function borrarProducto(title){
     
     localStorage.carrito = JSON.stringify(carrito);
     document.getElementById("contador-carrito").innerHTML = carrito.length;
-    listaCarrito();
-    
+    listaCarrito();    
 }
 
 //calcular total a pagar
 let precioTotal = 0
 
-carrito.forEach(producto => { precioTotal  +=  producto.price });
+carrito.forEach(producto => { 
+    precioTotal  +=  producto.price 
+});
 $("#total").html("TOTAL:    " + precioTotal);
 
 
@@ -145,41 +145,24 @@ $("#total").html("TOTAL:    " + precioTotal);
 
 
 
-
-
-
-
-//*********************************************************************************** */
-
 //url base     https://api.mercadopago.com
 // edpoint     /checkout/preferences
-const  producto1 = {
-    name: 'compra Tola-Tola',
-    price: precioTotal,
-    stock: 9999,
-    img: 'https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Logos/Logo%20Instagram.jpg',
-    offer: null
+
+const totalFinal = {"items": [
+    {
+      "title": "Su compra en Tola-Tola",
+      "description": "",
+      "picture_url": 'https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Logos/Logo%20Instagram.jpg',
+      "category_id": "",
+      "quantity": 1,
+      "currency_id": "ARS",
+      "unit_price": precioTotal
+  }]
 }
 
-const carro = [producto1,];
 
-const elementosMercadopago = carro.map(producto => {
-    return {
-        "title": producto.name,
-        "description": "",
-        "picture_url": producto.img,
-        "category_id": "",
-        "quantity": 1,
-        "currency_id": "ARS",
-        "unit_price": producto.price
-    }
-})
-const elemento = { "items": elementosMercadopago }
-
-
-
-function pagar(){
-
+function pagar(i){
+    let totalFinal = i;
     $.ajaxSetup({
         headers : {
             'Authorization': 'Bearer TEST-2126268000141506-092522-168d7240ca77684a5987f0bd5c377b9c-830672308',
@@ -187,27 +170,11 @@ function pagar(){
         }
     });
     
-    $.post("https://api.mercadopago.com/checkout/preferences", JSON.stringify(elemento), (respuesta, status) => {
-    urlPago = respuesta.init_point
-    window.open(`${urlPago}`);
+    $.post("https://api.mercadopago.com/checkout/preferences", JSON.stringify(totalFinal), (respuesta, status) => {
+        urlPago = respuesta.init_point
+        window.open(`${urlPago}`);        
     });
-
-}   
-    
-
-
-
-
-
-//"https://sandbox.mercadopago.com.ar/checkout/v1/redirect?pref_id=830672308-4a1d98ef-5101-46fc-b6ed-bfe1aae3e813"
-
-
-
-
-
-
-
-//*****************************************************************************
+}
 
 
 //animacion logo
@@ -241,5 +208,5 @@ function mostrarDatos() {
       });
 }
 
-//////////////////////////////////////////////////////////////////////////////////
+
 
