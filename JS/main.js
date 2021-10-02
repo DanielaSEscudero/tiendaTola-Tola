@@ -50,6 +50,11 @@ function filtrarProductos(filtro = 'default'){
     $("#productos").html(acumulador)
 }
 
+
+
+
+
+
 // funcionalidad del carrito
 
 function agregarAlCarrito(title){
@@ -77,6 +82,7 @@ function listaCarrito(){
     <td> <img src="${producto.img}" width=100</td>
     <td>${producto.title}</td>
     <td>$ ${producto.price}</td>
+    <td> 1 </td>
     <td>
         <a href="#" class="borrar-producto bi bi-x-square" style="font-size: 30px" data-id="${producto.title}" onclick="borrarProducto('${producto.title}')"></a>
     </td>
@@ -84,6 +90,8 @@ function listaCarrito(){
     });
     $("#listado").html(acumulador)
 }
+
+
 
 
 //borrar productos del carrito
@@ -98,35 +106,63 @@ function borrarProducto(title){
     localStorage.carrito = JSON.stringify(carrito);
     document.getElementById("contador-carrito").innerHTML = carrito.length;
     listaCarrito();
-  
+    
 }
 
 //calcular total a pagar
 let precioTotal = 0
 
-carrito.forEach(producto => {
-    precioTotal  +=  producto.price 
-
-});
-$('#total').html("Total="+ precioTotal);
+carrito.forEach(producto => { precioTotal  +=  producto.price });
+$("#total").html("TOTAL:    " + precioTotal);
 
 
+// verDetalle();
+// function verDetalle(){
+//     let acumulador = ``;
+//     todosLosProductos.forEach((producto) => {
+//     acumulador += `<div class="container px-4 px-lg-5 my-5">
+//     <div class="row gx-4 gx-lg-5 align-items-center">
+//         <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="${producto.img}" alt="..." /></div>
+//         <div class="col-md-6">
+//             <h1 class="display-5 fw-bolder">${producto.title}</h1>
+//             <div class="fs-5 mb-5">
+//             <p class="lead">${producto.description}</p>
+//             </div>
+//             <span>$ ${producto.price}</span>
+//             <div class="d-flex">
+//                 <button class="btn btn-outline-dark flex-shrink-0" type="button">
+//                 <a class="btn btn-outline-dark mt-auto"                    
+//                 onclick="agregarAlCarrito('${producto.title}')">Agregar al carrito</a>
+//                 </button>
+//             </div>
+//         </div>
+//         </div>
+//     </div>`
+//     });
+//     $("#Productos").html(acumulador)
+// }
 
 
 
 
+
+
+
+
+//*********************************************************************************** */
 
 //url base     https://api.mercadopago.com
 // edpoint     /checkout/preferences
 const  producto1 = {
-    name: 'Zapa niky',
-    price: 9000,
+    name: 'compra Tola-Tola',
+    price: precioTotal,
     stock: 9999,
     img: 'null',
     offer: null
 }
 
-const carro = [producto1, producto1];
+const carro = [producto1,];
+
 const elementosMercadopago = carro.map(producto => {
     return {
         "title": producto.name,
@@ -141,6 +177,7 @@ const elementosMercadopago = carro.map(producto => {
 const elemento = { "items": elementosMercadopago }
 
 
+
 $.ajaxSetup({
     headers : {
         'Authorization': 'Bearer TEST-2126268000141506-092522-168d7240ca77684a5987f0bd5c377b9c-830672308',
@@ -148,15 +185,25 @@ $.ajaxSetup({
     }
 });
 
-$.post("https://api.mercadopago.com/checkout/preferences", JSON.stringify(elemento), (respuesta, status) => {
-    console.log(respuesta);
+
+    
+    $.post("https://api.mercadopago.com/checkout/preferences", JSON.stringify(elemento), (respuesta, status) => {
+    urlPago = respuesta.init_point
+    window.open(`${urlPago}`);
 });
+
+
 //"https://sandbox.mercadopago.com.ar/checkout/v1/redirect?pref_id=830672308-4a1d98ef-5101-46fc-b6ed-bfe1aae3e813"
 
 
 
 
+
+
+
 //*****************************************************************************
+
+
 //animacion logo
 $(document).ready(function(){
     $("#logoCentral").click(function(){
@@ -187,3 +234,6 @@ function mostrarDatos() {
         button: "ok!",
       });
 }
+
+//////////////////////////////////////////////////////////////////////////////////
+
