@@ -110,10 +110,8 @@ function borrarProducto(title){
 //calcular total a pagar
 let precioTotal = 0
 
-carrito.forEach(producto => { 
-    precioTotal  +=  producto.price 
-});
-$("#total").html("TOTAL:    " + precioTotal);
+carrito.forEach(producto => {precioTotal  +=  producto.price });
+$("#total").html("$ " + precioTotal);
 
 
 // verDetalle();
@@ -152,9 +150,9 @@ const totalFinal = {"items": [
     {
       "title": "Su compra en Tola-Tola",
       "description": "",
-      "picture_url": 'https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Logos/Logo%20Instagram.jpg',
+      "picture_url": "",
       "category_id": "",
-      "quantity": 1,
+      "quantity": "1",
       "currency_id": "ARS",
       "unit_price": precioTotal
   }]
