@@ -28,10 +28,10 @@ function filtrarProductos(filtro = 'default'){
     todosLosProductos;
    
     let acumulador = ``;
-    nuevosProductos.forEach((producto) => {
+    nuevosProductos.forEach((producto) => { 
     acumulador += `<div class="col mb-5 cajas" id="${producto.title}">
             <div class="card h-100">
-                <img class="card-img-top" id="btn${producto.title}" onclick="verDetalle('${producto.title}')"src="${producto.img}" alt="..." />
+                <img class="card-img-top" id="btn${producto.title}" onclick="verDetalle('${producto.title}')" src="${producto.img}" alt="..." />
                 <div class="card-body p-4">
                     <div class="text-center">
                         <h5 class="fw-bolder">${producto.title}</h5>
@@ -83,7 +83,7 @@ function listaCarrito(){
     <td>${producto.title}</td>
     <td>$ ${producto.price}</td>
     <td>
-        <a href="#" class="borrar-producto bi bi-x-square" style="font-size: 30px" data-id="${producto.title}" onclick="borrarProducto('${producto.title}')"></a>
+        <a href="#" class="borrar-producto bi bi-x-square" style="font-size: 30px" onclick="borrarProducto('${producto.title}')"></a>
     </td>
     </tr>`
     });
@@ -104,43 +104,58 @@ function borrarProducto(title){
     
     localStorage.carrito = JSON.stringify(carrito);
     document.getElementById("contador-carrito").innerHTML = carrito.length;
-    listaCarrito();    
+    listaCarrito();   
 }
 
 //calcular total a pagar
-let precioTotal = 0
 
+let precioTotal = 0
 carrito.forEach(producto => {precioTotal  +=  producto.price });
 $("#total").html("$ " + precioTotal);
 
 
-// verDetalle();
-// function verDetalle(){
-//     let acumulador = ``;
-//     todosLosProductos.forEach((producto) => {
-//     acumulador += `<div class="container px-4 px-lg-5 my-5">
-//     <div class="row gx-4 gx-lg-5 align-items-center">
-//         <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="${producto.img}" alt="..." /></div>
-//         <div class="col-md-6">
-//             <h1 class="display-5 fw-bolder">${producto.title}</h1>
-//             <div class="fs-5 mb-5">
-//             <p class="lead">${producto.description}</p>
-//             </div>
-//             <span>$ ${producto.price}</span>
-//             <div class="d-flex">
-//                 <button class="btn btn-outline-dark flex-shrink-0" type="button">
-//                 <a class="btn btn-outline-dark mt-auto"                    
-//                 onclick="agregarAlCarrito('${producto.title}')">Agregar al carrito</a>
-//                 </button>
-//             </div>
-//         </div>
-//         </div>
-//     </div>`
-//     });
-//     $("#Productos").html(acumulador)
-// }
 
+let detalles = [];
+if (localStorage.detalles !=null){
+    detalles = detalles = JSON.parse(localStorage.detalles);
+}
 
+function verDetalle(title){
+    const productoEncontrado = todosLosProductos.find(producto => producto.title === title);
+    if(productoEncontrado != undefined){
+        detalles.push(productoEncontrado);
+    }
+    localStorage.detalles = JSON.stringify(detalles);  
+
+    let acumulador = ``;
+    detalles.map((producto) => {
+    acumulador += `<section class="col-md-12">
+        <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="${producto.img}" alt="..." /></div>
+            <div class="col-md-6">
+                <h1 class="display-5 fw-bolder">${producto.title}</h1>
+                <div class="fs-5 mb-5">
+                <p class="lead">${producto.description}</p>
+                </div>
+                <h3> $ ${producto.price}</h3>
+                <div class="d-flex">
+                    <button class="btn btn-outline-dark flex-shrink-0" type="button"                    
+                    onclick="agregarAlCarrito('${producto.title}')">Agregar al carrito
+                    </button>
+                    <button class="btn btn-outline-dark flex-shrink-0" type="button"                   
+                    onclick="borrarProducto('${producto.title}')">Eliminar del carrito
+                    </button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <a href="index.html" class="bi bi-arrow-left">Volver </a>
+        </section>` 
+    $("#productos").html(acumulador)
+    });
+    localStorage.clear();
+}
 
 
 //url base     https://api.mercadopago.com
@@ -150,9 +165,9 @@ const totalFinal = {"items": [
     {
       "title": "Su compra en Tola-Tola",
       "description": "",
-      "picture_url": "",
+      "picture_url": "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Logos/Logo%20Instagram.jpg",
       "category_id": "",
-      "quantity": "1",
+      "quantity": 1,
       "currency_id": "ARS",
       "unit_price": precioTotal
   }]
@@ -161,17 +176,28 @@ const totalFinal = {"items": [
 
 function pagar(i){
     let totalFinal = i;
-    $.ajaxSetup({
-        headers : {
-            'Authorization': 'Bearer TEST-2126268000141506-092522-168d7240ca77684a5987f0bd5c377b9c-830672308',
-            'Content-Type': 'application/json'
-        }
-    });
-    
-    $.post("https://api.mercadopago.com/checkout/preferences", JSON.stringify(totalFinal), (respuesta, status) => {
-        urlPago = respuesta.init_point
-        window.open(`${urlPago}`);        
-    });
+    if (precioTotal != 0){
+        $.ajaxSetup({
+            headers : {
+                'Authorization': 'Bearer TEST-2126268000141506-092522-168d7240ca77684a5987f0bd5c377b9c-830672308',
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        $.post("https://api.mercadopago.com/checkout/preferences", JSON.stringify(totalFinal), (respuesta, status) => {
+            urlPago = respuesta.init_point
+            window.open(`${urlPago}`);        
+        });
+        localStorage.clear();
+        listaCarrito(); 
+    }else{
+        swal({
+            title: "El carrito esta vacio!",
+            text: "Seleciona tus productos",
+            icon: "warning",
+            button: "ok!",
+          });
+    }
 }
 
 

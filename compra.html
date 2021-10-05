@@ -34,21 +34,19 @@
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
                 </ul>
             </div>
-            <form class="d-flex">               
-                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" id="btnCarrito">
+                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" id="btnCarrito" onsubmit="event.preventDefault()">
                     <a href="compra.html"> <i class="bi-cart-fill me-1"></i>
                     Carrito</a>
                     <span id="contador-carrito" onclick="abrirCarrito()" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                 </button>
         </div>
     </nav>
-    
     <main>
         <div class="container">
             <div class="row mt-3">
                 <div class="col">
                     <h2 class="d-flex justify-content-center mb-3">Finalizar Compra</h2>
-                    <form id="procesar-pago">
+                    <form id="procesar-pago" onsubmit="event.preventDefault()">
                         <div class="datosCompra">
                         <div class="form-group row">
                             <label for="cliente" class="col-12 col-md-2 col-form-label h2">Cliente :</label>
