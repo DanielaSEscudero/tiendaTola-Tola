@@ -31,7 +31,7 @@ function filtrarProductos(filtro = 'default'){
     nuevosProductos.forEach((producto) => { 
     acumulador += `<div class="col mb-5 cajas" id="${producto.title}">
             <div class="card h-100">
-                <img class="card-img-top" id="btn${producto.title}" onclick="verDetalle('${producto.title}')" src="${producto.img}" alt="..." />
+                <img class="card-img-top" onclick="verDetalle('${producto.title}')" src="${producto.img}" alt="..." />
                 <div class="card-body p-4">
                     <div class="text-center">
                         <h5 class="fw-bolder">${producto.title}</h5>
@@ -104,7 +104,8 @@ function borrarProducto(title){
     
     localStorage.carrito = JSON.stringify(carrito);
     document.getElementById("contador-carrito").innerHTML = carrito.length;
-    listaCarrito();   
+    listaCarrito(); 
+    location.reload();
 }
 
 //calcular total a pagar
@@ -129,32 +130,37 @@ function verDetalle(title){
 
     let acumulador = ``;
     detalles.map((producto) => {
-    acumulador += `<section class="col-md-12">
-        <div class="container px-4 px-lg-5 my-5">
+    acumulador += `<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="${producto.img}" alt="..." /></div>
             <div class="col-md-6">
+                <div class="small mb-1"></div>
                 <h1 class="display-5 fw-bolder">${producto.title}</h1>
                 <div class="fs-5 mb-5">
+                    <span>$ ${producto.price} </span>
+                </div>
                 <p class="lead">${producto.description}</p>
-                </div>
-                <h3> $ ${producto.price}</h3>
                 <div class="d-flex">
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button"                    
-                    onclick="agregarAlCarrito('${producto.title}')">Agregar al carrito
-                    </button>
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button"                   
-                    onclick="borrarProducto('${producto.title}')">Eliminar del carrito
+                    <button class="btn btn-outline-dark flex-shrink-0" type="button" onclick="agregarAlCarrito('${producto.title}')">
+                        <i class="bi-cart-fill me-1"></i>
+                        Agregar al carrito
                     </button>
                 </div>
-            </div>
+                <div class="d-flex">
+                    <button class="btn btn-outline-dark flex-shrink-0" type="button" onclick="borrarProducto('${producto.title}')">
+                        <i class="bi-cart-fill me-1"></i>
+                        Eliminar del carrito
+                    </button>
+                </div>
             </div>
         </div>
-        <a href="index.html" class="bi bi-arrow-left">Volver </a>
-        </section>` 
-    $("#productos").html(acumulador)
+    </div>
+    <a href="index.html"><i class="bi bi-arrow-left">Volver</i></a>
+    </section>` 
+    $("#main").html(acumulador)
     });
-    localStorage.clear();
+    localStorage.removeItem('detalles');
 }
 
 
@@ -188,8 +194,14 @@ function pagar(i){
             urlPago = respuesta.init_point
             window.open(`${urlPago}`);        
         });
-        localStorage.clear();
-        listaCarrito(); 
+        localStorage.removeItem('carrito'); 
+        swal({
+            title: "Gracias por tu compra!",
+            text: "nos comunicaremos a la brevedad",
+            icon: "success",
+            button: "ok!",
+        });
+        
     }else{
         swal({
             title: "El carrito esta vacio!",
