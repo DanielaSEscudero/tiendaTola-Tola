@@ -208,7 +208,7 @@ function pagar(i){
             text: "Seleciona tus productos",
             icon: "warning",
             button: "ok!",
-          });
+        });
     }
 }
 
