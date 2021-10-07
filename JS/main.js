@@ -4,7 +4,7 @@ if (localStorage.carrito !=null){
     document.getElementById("contador-carrito").innerHTML = carrito.length;
 }
 
-
+// productos
 
 const producto_uno = new Producto("Tazas", 800, "Taza de Cerámica Premium personalizada", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/taza%201.JPG", "tazas",  );
 const producto_dos = new Producto("Chopp", 1200, "Chopp de vidrio Esmerilado personalizado", "https://raw.githubusercontent.com/DanielaSEscudero/tiendaTola-Tola/main/multimedia/Productos/chop%201.JPG", "tazas", );
@@ -50,72 +50,7 @@ function filtrarProductos(filtro = 'default'){
     $("#productos").html(acumulador)
 }
 
-
-
-
-
-
-// funcionalidad del carrito
-
-function agregarAlCarrito(title){
-    const productoEncontrado = todosLosProductos.find(producto => producto.title === title);
-    if(productoEncontrado != undefined){
-        carrito.push(productoEncontrado);
-    }else{
-        alert("algo falló");
-    }
-    localStorage.carrito = JSON.stringify(carrito);
-    document.getElementById("contador-carrito").innerHTML = carrito.length;  
-}
-
-
-
-//**************************************************************************** */
-//nueva pag carrito
-
-listaCarrito();
-
-function listaCarrito(){
-    let acumulador = ``;
-    carrito.forEach((producto) => {
-    acumulador += `<tr>
-    <td> <img src="${producto.img}" width=100</td>
-    <td>${producto.title}</td>
-    <td>$ ${producto.price}</td>
-    <td>
-        <a href="#" class="borrar-producto bi bi-x-square" style="font-size: 30px" onclick="borrarProducto('${producto.title}')"></a>
-    </td>
-    </tr>`
-    });
-    $("#listado").html(acumulador)
-}
-
-
-
-
-//borrar productos del carrito
-function borrarProducto(title){
-    const productoEncontrado = carrito.filter(producto => producto.title != title);
-    if (productoEncontrado.length > 0 ){
-        carrito =  productoEncontrado
-    }else{
-        carrito = []
-    }
-    
-    localStorage.carrito = JSON.stringify(carrito);
-    document.getElementById("contador-carrito").innerHTML = carrito.length;
-    listaCarrito(); 
-    location.reload();
-}
-
-//calcular total a pagar
-
-let precioTotal = 0
-carrito.forEach(producto => {precioTotal  +=  producto.price });
-$("#total").html("$ " + precioTotal);
-
-
-
+//creando vista de detalles de producto
 let detalles = [];
 if (localStorage.detalles !=null){
     detalles = detalles = JSON.parse(localStorage.detalles);
@@ -164,6 +99,69 @@ function verDetalle(title){
 }
 
 
+
+
+
+// funcionalidad del carrito
+
+function agregarAlCarrito(title){
+    const productoEncontrado = todosLosProductos.find(producto => producto.title === title);
+    if(productoEncontrado != undefined){
+        carrito.push(productoEncontrado);
+    }else{
+        alert("algo falló");
+    }
+    localStorage.carrito = JSON.stringify(carrito);
+    document.getElementById("contador-carrito").innerHTML = carrito.length;  
+}
+
+
+
+//nueva pag carrito
+
+listaCarrito();
+
+function listaCarrito(){
+    let acumulador = ``;
+    carrito.forEach((producto) => {
+    acumulador += `<tr>
+    <td> <img src="${producto.img}" width=100</td>
+    <td>${producto.title}</td>
+    <td>$ ${producto.price}</td>
+    <td>
+        <a href="#" class="borrar-producto bi bi-x-square" style="font-size: 30px" onclick="borrarProducto('${producto.title}')"></a>
+    </td>
+    </tr>`
+    });
+    $("#listado").html(acumulador)
+}
+
+
+//borrar productos del carrito
+function borrarProducto(title){
+    const productoEncontrado = carrito.filter(producto => producto.title != title);
+    if (productoEncontrado.length > 0 ){
+        carrito =  productoEncontrado
+    }else{
+        carrito = []
+    }
+    
+    localStorage.carrito = JSON.stringify(carrito);
+    document.getElementById("contador-carrito").innerHTML = carrito.length;
+    listaCarrito(); 
+    location.reload();
+}
+
+//calcular total a pagar
+
+let precioTotal = 0
+carrito.forEach(producto => {precioTotal  +=  producto.price });
+$("#total").html("$ " + precioTotal);
+
+
+
+
+
 //url base     https://api.mercadopago.com
 // edpoint     /checkout/preferences
 
@@ -182,7 +180,26 @@ const totalFinal = {"items": [
 
 function pagar(i){
     let totalFinal = i;
-    if (precioTotal != 0){
+    let cliente = document.getElementById("cliente");
+    let correo = document.getElementById("correo");
+
+    if (precioTotal === 0){
+        swal({
+            title: "El carrito esta vacio!",
+            text: "Seleciona tus productos",
+            icon: "warning",
+            button: "ok!",
+        }).then(function () {
+            window.location = "index.html";
+        });
+    }else if (cliente.value === ''|| correo.value === '') {
+        swal({
+            title: "Completa los Datos!",
+            text: "para poder contactarnos.",
+            icon: "warning",
+            button: "ok!",
+        })
+    }else {  
         $.ajaxSetup({
             headers : {
                 'Authorization': 'Bearer TEST-2126268000141506-092522-168d7240ca77684a5987f0bd5c377b9c-830672308',
@@ -200,17 +217,13 @@ function pagar(i){
             text: "nos comunicaremos a la brevedad",
             icon: "success",
             button: "ok!",
-        });
-        
-    }else{
-        swal({
-            title: "El carrito esta vacio!",
-            text: "Seleciona tus productos",
-            icon: "warning",
-            button: "ok!",
+        }).then(function () {
+            window.location = "index.html";
         });
     }
 }
+    
+
 
 
 //animacion logo
@@ -226,22 +239,27 @@ function mostrarDatos() {
     let nombre = document.getElementById("nombre").value;
     let mail = document.getElementById("mail").value;
     let mensaje = document.getElementById("mensaje").value;
-  
-    console.log(nombre, mail, mensaje)
-  
-    let valores = {
-      nombre: nombre,
-      mail: mail,
-      mensaje: mensaje,
-    }
-    console.log(valores);
+    let enviar = document.getElementById("btn_Validar");
 
-    swal({
-        title: "Gracias!",
-        text: "Nos pondremos en contacto!",
-        icon: "success",
-        button: "ok!",
-      });
+    if (nombre.length ==0 || mail.length ==0 || mensaje.length ==0){
+        enviar = null;
+    }else{
+        let valores = {
+            nombre: nombre,
+            mail: mail,
+            mensaje: mensaje,
+          }
+          localStorage.valores = JSON.stringify(valores);  
+        swal({
+            title: "Gracias!",
+            text: "Nos pondremos en contacto!",
+            icon: "success",
+            button: "ok!",
+          });
+        
+    }
+    
+
 }
 
 
